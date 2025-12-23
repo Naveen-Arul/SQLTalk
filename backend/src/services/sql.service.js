@@ -99,10 +99,19 @@ QUERY GENERATION STYLE
 
 - Prefer simple, readable SQL
 - Use GROUP BY when aggregating
+- When using GROUP BY, ALL non-aggregate columns in SELECT must be included in GROUP BY clause
 - Use ORDER BY and LIMIT when user asks for "top" or "highest"
 - Assume data is trusted and clean
 - Do NOT explain the SQL
 - Output ONLY the SQL query
+
+========================
+POSTGRESQL GROUP BY RULES
+========================
+
+- If you use GROUP BY, every column in SELECT that is not an aggregate function (COUNT, SUM, AVG, MAX, MIN) MUST be in the GROUP BY clause
+- Example of CORRECT query: SELECT customer_name, COUNT(*) FROM customers GROUP BY customer_name
+- Example of INCORRECT query: SELECT customer_name, COUNT(*) FROM customers GROUP BY customer_id
 
 ========================
 FINAL CONSTRAINT
