@@ -33,8 +33,13 @@ const AnalyzePage = () => {
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to analyze query';
       setError(errorMessage);
+      
+      // Determine if this is a security issue or connection issue
+      const isSecurityIssue = (err as any).isSecurityIssue;
+      const isConnectionError = (err as any).isConnectionError;
+      
       toast({
-        title: 'Analysis Failed',
+        title: isSecurityIssue ? 'Security Restriction' : 'Analysis Failed',
         description: errorMessage,
         variant: 'destructive',
       });
@@ -108,11 +113,15 @@ const AnalyzePage = () => {
                     <AlertCircle className="w-6 h-6 text-destructive" />
                   </div>
                   <div>
-                    <h3 className="font-display font-semibold text-foreground mb-1 text-lg">Analysis Failed</h3>
+                    <h3 className="font-display font-semibold text-foreground mb-1 text-lg">
+                      {error.includes('Security restriction') ? 'Security Restriction' : 'Analysis Failed'}
+                    </h3>
                     <p className="text-muted-foreground mb-3">{error}</p>
-                    <p className="text-sm text-muted-foreground/70">
-                      Make sure the backend server is running at localhost:5000
-                    </p>
+                    {!error.includes('Security restriction') && (
+                      <p className="text-sm text-muted-foreground/70">
+                        Make sure the backend server is running at localhost:5000
+                      </p>
+                    )}
                   </div>
                 </motion.div>
               )}

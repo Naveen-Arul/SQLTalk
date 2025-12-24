@@ -26,6 +26,13 @@ export interface AnalyzeResponse {
   execution_time_ms: number;
 }
 
+export interface AnalyzeErrorResponse {
+  error: string;
+  message: string;
+  sql: string;
+  securityIssue?: boolean;
+}
+
 export const checkHealth = async (): Promise<HealthResponse> => {
   const response = await api.get<HealthResponse>('/health');
   return response.data;
@@ -37,6 +44,26 @@ export const fetchRawData = async (): Promise<unknown[]> => {
 };
 
 export const analyzeQuery = async (query: string): Promise<AnalyzeResponse> => {
-  const response = await api.post<AnalyzeResponse>('/api/analyze', { query });
-  return response.data;
+  try {
+    const response = await api.post<AnalyzeResponse>('/api/analyze', { query });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      const errorResponse = error.response.data as AnalyzeErrorResponse;
+      if (errorResponse.securityIssue) {
+        // Create a specific error for security issues
+        const securityError = new Error(errorResponse.message);
+        (securityError as any).isSecurityIssue = true;
+        throw securityError;
+      }
+      throw new Error(`${errorResponse.error}: ${errorResponse.message}`);
+    }
+    // For network/timeout errors, throw a connection error
+    if (axios.isAxiosError(error)) {
+      const connectionError = new Error('Connection error: Unable to reach the backend server');
+      (connectionError as any).isConnectionError = true;
+      throw connectionError;
+    }
+    throw error;
+  }
 };

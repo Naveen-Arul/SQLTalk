@@ -6,8 +6,6 @@ const db = require('../config/db');
 const analyzeUserQuery = async (req, res) => {
   try {
     const { query } = req.body;
-
-    // Validate input
     if (!query || typeof query !== 'string' || query.trim().length === 0) {
       return res.status(400).json({
         error: 'Invalid input',
@@ -22,9 +20,10 @@ const analyzeUserQuery = async (req, res) => {
     const validation = validateSQL(generatedSQL);
     if (!validation.isValid) {
       return res.status(400).json({
-        error: 'SQL validation failed',
+        error: validation.securityIssue ? 'Security restriction' : 'SQL validation failed',
         message: validation.error,
-        sql: generatedSQL
+        sql: generatedSQL,
+        securityIssue: validation.securityIssue || false
       });
     }
     
