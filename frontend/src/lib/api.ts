@@ -1,6 +1,19 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+let API_BASE_URL = 'http://localhost:5000';
+
+// In production, use the environment variable or construct from window.location
+if (typeof window !== 'undefined') {
+  if (import.meta.env.VITE_API_BASE_URL) {
+    API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  } else if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    // In production, use the same protocol and host as the frontend
+    API_BASE_URL = `${window.location.protocol}//${window.location.host}`;
+  }
+} else {
+  // For server-side rendering or build time
+  API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+}
 
 export const api = axios.create({
   baseURL: API_BASE_URL,

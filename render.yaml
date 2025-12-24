@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: db-chat-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm run start"
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        sync: false
+      - key: AI_KEY
+        sync: false
