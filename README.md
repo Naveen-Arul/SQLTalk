@@ -34,7 +34,7 @@ A full-stack application that allows users to query databases using natural lang
 1. Create a new project on Vercel
 2. Connect to this GitHub repository
 3. Set the environment variables:
-   - `VITE_API_BASE_URL`: URL of your deployed backend (e.g., `https://your-app.onrender.com`)
+   - `VITE_API_BASE_URL`: URL of your deployed backend (e.g., `https://sqltalk-backend.onrender.com`)
 4. The build command will automatically use the `vercel.json` configuration
 
 ## Environment Variables

@@ -2,17 +2,16 @@ import axios from 'axios';
 
 let API_BASE_URL = 'http://localhost:5000';
 
-// In production, use the environment variable or construct from window.location
-if (typeof window !== 'undefined') {
-  if (import.meta.env.VITE_API_BASE_URL) {
-    API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  } else if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    // In production, use the same protocol and host as the frontend
-    API_BASE_URL = `${window.location.protocol}//${window.location.host}`;
+// In production, use the environment variable
+if (import.meta.env.VITE_API_BASE_URL) {
+  API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+} else if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+  // In production, use the same protocol and host as the frontend
+  API_BASE_URL = `${window.location.protocol}//${window.location.host}`;
+  // If the host is Vercel's domain, default to the Render backend
+  if (window.location.hostname.includes('vercel') || window.location.hostname.includes('now.sh')) {
+    API_BASE_URL = 'https://sqltalk-backend.onrender.com';
   }
-} else {
-  // For server-side rendering or build time
-  API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 }
 
 export const api = axios.create({
