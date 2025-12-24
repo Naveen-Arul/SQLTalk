@@ -28,6 +28,11 @@ app.use(express.json());
 app.use('/api', dataRoutes);
 app.use('/api', analyzeRoutes);
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ message: 'SQLTalk Backend API', status: 'running' });
+});
+
 // Health check route
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'Server is running' });
