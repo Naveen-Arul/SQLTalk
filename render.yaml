@@ -4,8 +4,9 @@ services:
     env: node
     region: oregon
     plan: free
+    rootDir: backend
     buildCommand: "npm install"
-    startCommand: "npm run start"
+    startCommand: "npm start"
     envVars:
       - key: NODE_VERSION
         value: 18
@@ -14,4 +15,8 @@ services:
       - key: DATABASE_URL
         sync: false
       - key: AI_KEY
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: ALLOWED_ORIGINS
         sync: false
