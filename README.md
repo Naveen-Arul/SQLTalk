@@ -8,7 +8,7 @@ Check out the live application: [https://sql-talk.vercel.app/](https://sql-talk.
 
 ## Application Screenshot
 
-![SQLTalk Application](frontend-img.png)
+![SQLTalk Application](./frontend/frontend-img.png)
 
 ## Project Architecture
 
