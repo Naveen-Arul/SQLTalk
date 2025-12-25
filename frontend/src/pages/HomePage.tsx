@@ -177,44 +177,52 @@ const HomePage = () => {
 
             {/* Developer Info */}
             <div className="mb-8 text-center">
-              <div className="inline-block bg-card border border-border rounded-2xl p-6 shadow-soft">
+              <div className="inline-block bg-card border border-border rounded-2xl p-6 shadow-soft hover:shadow-glow transition-all duration-300">
                 <p className="text-sm font-medium text-foreground mb-4">Developed by Naveen Arul</p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <a 
                     href="https://linkedin.com/in/naveen2408" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-500/10 to-blue-600/10 hover:from-blue-500/20 hover:to-blue-600/20 transition-all duration-300 border border-blue-500/20 hover:border-blue-500/40 shadow-sm hover:shadow-md"
+                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-500/10 to-blue-600/10 hover:from-blue-500/20 hover:to-blue-600/20 transition-all duration-300 border border-blue-500/20 hover:border-blue-500/40 shadow-sm hover:shadow-lg hover:scale-105 group"
                   >
-                    <Users className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm font-medium text-blue-700 dark:text-blue-300">LinkedIn</span>
+                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors duration-300">
+                      <Users className="w-4 h-4 text-blue-500 group-hover:text-blue-600 transition-colors duration-300" />
+                    </div>
+                    <span className="text-sm font-medium text-blue-700 dark:text-blue-300 group-hover:text-blue-800 dark:group-hover:text-blue-200 transition-colors duration-300">LinkedIn</span>
                   </a>
                   <a 
                     href="https://github.com/Naveen-Arul" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-gray-700/10 to-gray-800/10 hover:from-gray-700/20 hover:to-gray-800/20 transition-all duration-300 border border-gray-700/20 hover:border-gray-700/40 shadow-sm hover:shadow-md"
+                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-gray-700/10 to-gray-800/10 hover:from-gray-700/20 hover:to-gray-800/20 transition-all duration-300 border border-gray-700/20 hover:border-gray-700/40 shadow-sm hover:shadow-lg hover:scale-105 group"
                   >
-                    <Code className="w-4 h-4 text-gray-700 dark:text-gray-300" />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">GitHub</span>
+                    <div className="w-8 h-8 rounded-lg bg-gray-700/10 flex items-center justify-center group-hover:bg-gray-700/20 transition-colors duration-300">
+                      <Code className="w-4 h-4 text-gray-700 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300" />
+                    </div>
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">GitHub</span>
                   </a>
                   <a 
                     href="https://leetcode.com/u/NaveenA_kec/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-orange-500/10 to-orange-600/10 hover:from-orange-500/20 hover:to-orange-600/20 transition-all duration-300 border border-orange-500/20 hover:border-orange-500/40 shadow-sm hover:shadow-md"
+                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-orange-500/10 to-orange-600/10 hover:from-orange-500/20 hover:to-orange-600/20 transition-all duration-300 border border-orange-500/20 hover:border-orange-500/40 shadow-sm hover:shadow-lg hover:scale-105 group"
                   >
-                    <BarChart3 className="w-4 h-4 text-orange-500" />
-                    <span className="text-sm font-medium text-orange-700 dark:text-orange-300">LeetCode</span>
+                    <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 transition-colors duration-300">
+                      <BarChart3 className="w-4 h-4 text-orange-500 group-hover:text-orange-600 transition-colors duration-300" />
+                    </div>
+                    <span className="text-sm font-medium text-orange-700 dark:text-orange-300 group-hover:text-orange-800 dark:group-hover:text-orange-200 transition-colors duration-300">LeetCode</span>
                   </a>
                   <a 
                     href="https://naveenarul.netlify.app" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-purple-500/10 to-purple-600/10 hover:from-purple-500/20 hover:to-purple-600/20 transition-all duration-300 border border-purple-500/20 hover:border-purple-500/40 shadow-sm hover:shadow-md"
+                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-purple-500/10 to-purple-600/10 hover:from-purple-500/20 hover:to-purple-600/20 transition-all duration-300 border border-purple-500/20 hover:border-purple-500/40 shadow-sm hover:shadow-lg hover:scale-105 group"
                   >
-                    <Briefcase className="w-4 h-4 text-purple-500" />
-                    <span className="text-sm font-medium text-purple-700 dark:text-purple-300">Portfolio</span>
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors duration-300">
+                      <Briefcase className="w-4 h-4 text-purple-500 group-hover:text-purple-600 transition-colors duration-300" />
+                    </div>
+                    <span className="text-sm font-medium text-purple-700 dark:text-purple-300 group-hover:text-purple-800 dark:group-hover:text-purple-200 transition-colors duration-300">Portfolio</span>
                   </a>
                 </div>
               </div>
