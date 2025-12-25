@@ -6,6 +6,10 @@ A full-stack application that allows users to query databases using natural lang
 
 Check out the live application: [https://sql-talk.vercel.app/](https://sql-talk.vercel.app/)
 
+## Application Screenshot
+
+![SQLTalk Application](frontend-img.png)
+
 ## Project Architecture
 
 ### Frontend (React + TypeScript)
