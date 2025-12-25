@@ -2,6 +2,10 @@
 
 A full-stack application that allows users to query databases using natural language, with the AI generating SQL queries and returning results with visualizations.
 
+## Live Demo
+
+Check out the live application: [https://sql-talk.vercel.app/](https://sql-talk.vercel.app/)
+
 ## Project Architecture
 
 ### Frontend (React + TypeScript)
