@@ -177,44 +177,46 @@ const HomePage = () => {
 
             {/* Developer Info */}
             <div className="mb-8 text-center">
-              <p className="text-sm text-muted-foreground mb-4">Developed by Naveen Arul</p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <a 
-                  href="https://linkedin.com/in/naveen2408" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Users className="w-4 h-4" />
-                  LinkedIn
-                </a>
-                <a 
-                  href="https://github.com/Naveen-Arul" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Code className="w-4 h-4" />
-                  GitHub
-                </a>
-                <a 
-                  href="https://leetcode.com/u/NaveenA_kec/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <BarChart3 className="w-4 h-4" />
-                  LeetCode
-                </a>
-                <a 
-                  href="https://naveenarul.netlify.app" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Briefcase className="w-4 h-4" />
-                  Portfolio
-                </a>
+              <div className="inline-block bg-card border border-border rounded-2xl p-6 shadow-soft">
+                <p className="text-sm font-medium text-foreground mb-4">Developed by Naveen Arul</p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <a 
+                    href="https://linkedin.com/in/naveen2408" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-border"
+                  >
+                    <Users className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-foreground">LinkedIn</span>
+                  </a>
+                  <a 
+                    href="https://github.com/Naveen-Arul" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-border"
+                  >
+                    <Code className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-foreground">GitHub</span>
+                  </a>
+                  <a 
+                    href="https://leetcode.com/u/NaveenA_kec/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-border"
+                  >
+                    <BarChart3 className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-foreground">LeetCode</span>
+                  </a>
+                  <a 
+                    href="https://naveenarul.netlify.app" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-border"
+                  >
+                    <Briefcase className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-foreground">Portfolio</span>
+                  </a>
+                </div>
               </div>
             </div>
 
