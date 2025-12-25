@@ -1,6 +1,6 @@
 # SQLTalk - AI-Powered Database Analytics
 
-A full-stack application that allows users to query databases using natural language, with the AI generating SQL queries and returning results with visualizations.
+A full-stack application that allows users to query databases using natural language, with the AI generating SQL queries and returning results with visualizations. SQLTalk bridges the gap between business users and data by enabling anyone to get insights from their data without SQL knowledge.
 
 ## Live Demo
 
@@ -10,9 +10,22 @@ Check out the live application: [https://sql-talk.vercel.app/](https://sql-talk.
 
 ![SQLTalk Application](./frontend/frontend-img.png)
 
-## Project Architecture
+## Key Features
 
-### Frontend (React + TypeScript)
+- Natural language to SQL conversion
+- Real-time query results
+- Interactive data visualizations
+- Export capabilities (CSV, Excel, PDF)
+- Secure SQL validation
+- User-friendly interface
+- Read-only operations for safety
+- Instant dashboard generation
+- Multi-table support
+- Advanced filtering options
+
+## Technology Stack
+
+### Frontend
 - **Framework**: React with TypeScript
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS with Shadcn UI components
@@ -20,14 +33,14 @@ Check out the live application: [https://sql-talk.vercel.app/](https://sql-talk.
 - **API Communication**: Axios
 - **Charts & Visualizations**: Recharts
 
-### Backend (Node.js + Express)
+### Backend
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Database**: PostgreSQL
 - **AI Integration**: Groq API for natural language processing
 - **Security**: Multi-layered SQL validation
 
-### Data Flow Architecture
+### Architecture
 
 ```
 User Input (Natural Language)
@@ -49,37 +62,23 @@ Results Processing
 Frontend Visualization
 ```
 
-## Core Components
-
-### Frontend Components
-- **QueryInput**: Handles user input and sends to backend
-- **ResultsTable**: Displays query results in tabular format
-- **ResultsChart**: Visualizes data with charts
-- **SQLDisplay**: Shows the generated SQL query
-- **ExportPanel**: Provides export functionality
-- **SchemaPanel**: Displays available database schema
-
-### Backend Services
-- **NLP Service**: Processes natural language using AI
-- **SQL Service**: Generates SQL queries from natural language
-- **SQL Validator**: Validates queries for security and syntax
-- **Database Service**: Handles PostgreSQL connections
-
 ## Security Architecture
 
-The application implements multiple security layers:
+The application implements multiple security layers to protect against SQL injection and unauthorized access:
 
-1. **AI Prompt Security**: AI is instructed to follow security guidelines
+1. **AI Prompt Security**: AI is instructed to follow security guidelines and generate only safe queries
 2. **SQL Validation**: Multi-step validation of generated SQL:
    - Only SELECT statements allowed
-   - Blocked keywords (INSERT, UPDATE, DELETE, etc.)
+   - Blocked keywords (INSERT, UPDATE, DELETE, DROP, etc.)
    - Disallowed tables validation
    - UNION query prevention
    - Comment pattern detection
    - GROUP BY compliance checking
 3. **Database Security**: Connection pooling with environment-based configuration
+4. **Read-Only Operations**: All queries are restricted to read-only operations
+5. **Schema Restrictions**: Limited access to specific business tables only
 
-## Workflow Process
+## How It Works
 
 1. **User Input**: User enters a natural language query in the frontend
 2. **API Request**: Frontend sends query to `/api/analyze` endpoint
@@ -90,37 +89,51 @@ The application implements multiple security layers:
 7. **Response Processing**: Results are formatted and sent back to frontend
 8. **Visualization**: Frontend displays results in table and chart formats
 
-## Features
+## Quick Start
 
-- Natural language to SQL conversion
-- Real-time query results
-- Interactive data visualizations
-- Export capabilities (CSV, Excel, PDF)
-- Secure SQL validation
-- User-friendly interface
+### Prerequisites
 
-## Tech Stack
+- Node.js (v18 or higher)
+- PostgreSQL database
+- Groq API key
 
-- **Frontend**: React, TypeScript, Vite, Tailwind CSS, Shadcn UI
-- **Backend**: Node.js, Express, PostgreSQL
-- **AI**: Groq API for natural language processing
-- **Database**: PostgreSQL
+### Installation
 
-## Local Development
+1. Clone the repository
+   ```bash
+   git clone https://github.com/Naveen-Arul/SQLTalk.git
+   cd SQLTalk
+   ```
 
-### Backend
-```bash
-cd backend
-npm install
-npm run dev
-```
+2. Install backend dependencies
+   ```bash
+   cd backend
+   npm install
+   ```
 
-### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
+3. Install frontend dependencies
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+4. Set up environment variables
+   - Create `.env` files in both `backend` and `frontend` directories
+   - Add your PostgreSQL connection string and Groq API key
+
+### Running Locally
+
+1. Start the backend server:
+   ```bash
+   cd backend
+   npm run dev
+   ```
+
+2. In a new terminal, start the frontend:
+   ```bash
+   cd frontend
+   npm run dev
+   ```
 
 ## API Endpoints
 
@@ -144,3 +157,25 @@ npm run dev
 3. Set the environment variables:
    - `VITE_API_BASE_URL`: URL of your deployed backend
 4. The build command will automatically use the `vercel.json` configuration
+
+## Contributing
+
+We welcome contributions to SQLTalk! Here's how you can help:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Add tests if applicable
+5. Commit your changes (`git commit -m 'Add some amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Built with React, TypeScript, Tailwind CSS, and Shadcn UI
+- Powered by Groq AI for natural language processing
+- PostgreSQL for reliable database operations
