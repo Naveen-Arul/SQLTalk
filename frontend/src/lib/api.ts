@@ -13,6 +13,12 @@ const normalizeApiBaseUrl = (value: string | undefined) => {
     return trimmedValue.replace(/\/+$/, '');
   }
 
+  if (trimmedValue.includes('.vercel.app/') && trimmedValue.includes('sql-talk.vercel.app/')) {
+    throw new Error(
+      'Invalid VITE_API_BASE_URL: set it to the backend host only, for example https://sql-talk-backend.vercel.app'
+    );
+  }
+
   return `https://${trimmedValue.replace(/^\/+/, '').replace(/\/+$/, '')}`;
 };
 
