@@ -2,7 +2,21 @@ import axios from 'axios';
 
 const defaultApiBaseUrl = 'http://localhost:5000';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.trim() || defaultApiBaseUrl;
+const normalizeApiBaseUrl = (value: string | undefined) => {
+  const trimmedValue = value?.trim();
+
+  if (!trimmedValue) {
+    return defaultApiBaseUrl;
+  }
+
+  if (/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(trimmedValue)) {
+    return trimmedValue.replace(/\/+$/, '');
+  }
+
+  return `https://${trimmedValue.replace(/^\/+/, '').replace(/\/+$/, '')}`;
+};
+
+const API_BASE_URL = normalizeApiBaseUrl(import.meta.env.VITE_API_BASE_URL);
 
 export const getApiBaseUrl = () => API_BASE_URL;
 

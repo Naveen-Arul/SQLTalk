@@ -155,7 +155,7 @@ The application implements multiple security layers to protect against SQL injec
 1. Create a new project on Vercel
 2. Connect to this GitHub repository
 3. Set the environment variables:
-   - `VITE_API_BASE_URL`: URL of your deployed backend
+   - `VITE_API_BASE_URL`: full URL of your deployed backend, for example `https://sql-talk-backend.vercel.app`
 4. The build command will automatically use the `vercel.json` configuration
 
 ## Contributing
