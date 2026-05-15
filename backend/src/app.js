@@ -16,7 +16,7 @@ const corsOptions = {
     'https://sqltalk-backend.onrender.com',
     'https://sql-talk.vercel.app', // Your production Vercel URL
     'https://sqltalk-git-main-username.vercel.app', // Replace with your actual Vercel URL
-    'https://*.vercel.app' // Wildcard for Vercel preview deployments
+    /^https:\/\/.+\.vercel\.app$/ // Vercel preview deployments
   ],
   credentials: true,
   optionsSuccessStatus: 200

@@ -58,15 +58,31 @@ export const analyzeQuery = async (query: string): Promise<AnalyzeResponse> => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      const errorResponse = error.response.data as AnalyzeErrorResponse;
-      if (errorResponse.securityIssue) {
+      const responseData = error.response.data;
+      const errorResponse =
+        responseData && typeof responseData === 'object'
+          ? (responseData as Partial<AnalyzeErrorResponse>)
+          : undefined;
+
+      if (errorResponse?.securityIssue) {
         // Create a specific error for security issues
-        const securityError = new Error(errorResponse.message);
+        const securityError = new Error(errorResponse.message || 'Security restriction');
         const flaggedSecurityError = securityError as ApiErrorWithFlags;
         flaggedSecurityError.isSecurityIssue = true;
         throw flaggedSecurityError;
       }
-      throw new Error(`${errorResponse.error}: ${errorResponse.message}`);
+
+      if (typeof responseData === 'string' && responseData.trim()) {
+        throw new Error(responseData.trim());
+      }
+
+      const fallbackMessage =
+        errorResponse?.message ||
+        error.response.statusText ||
+        `Request failed with status ${error.response.status}`;
+
+      const fallbackErrorLabel = errorResponse?.error || 'Backend error';
+      throw new Error(`${fallbackErrorLabel}: ${fallbackMessage}`);
     }
     // For network/timeout errors, throw a connection error
     if (axios.isAxiosError(error)) {
