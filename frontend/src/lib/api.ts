@@ -1,18 +1,15 @@
 import axios from 'axios';
 
-let API_BASE_URL = 'http://localhost:5000';
+const defaultApiBaseUrl = 'http://localhost:5000';
 
-// In production, use the environment variable
-if (import.meta.env.VITE_API_BASE_URL) {
-  API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-} else if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-  // In production, use the same protocol and host as the frontend
-  API_BASE_URL = `${window.location.protocol}//${window.location.host}`;
-  // If the host is Vercel's domain, default to the Render backend
-  if (window.location.hostname.includes('vercel') || window.location.hostname.includes('now.sh')) {
-    API_BASE_URL = 'https://sqltalk-backend.onrender.com';
-  }
-}
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.trim() || defaultApiBaseUrl;
+
+export const getApiBaseUrl = () => API_BASE_URL;
+
+type ApiErrorWithFlags = Error & {
+  isSecurityIssue?: boolean;
+  isConnectionError?: boolean;
+};
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -65,16 +62,18 @@ export const analyzeQuery = async (query: string): Promise<AnalyzeResponse> => {
       if (errorResponse.securityIssue) {
         // Create a specific error for security issues
         const securityError = new Error(errorResponse.message);
-        (securityError as any).isSecurityIssue = true;
-        throw securityError;
+        const flaggedSecurityError = securityError as ApiErrorWithFlags;
+        flaggedSecurityError.isSecurityIssue = true;
+        throw flaggedSecurityError;
       }
       throw new Error(`${errorResponse.error}: ${errorResponse.message}`);
     }
     // For network/timeout errors, throw a connection error
     if (axios.isAxiosError(error)) {
       const connectionError = new Error('Connection error: Unable to reach the backend server');
-      (connectionError as any).isConnectionError = true;
-      throw connectionError;
+      const flaggedConnectionError = connectionError as ApiErrorWithFlags;
+      flaggedConnectionError.isConnectionError = true;
+      throw flaggedConnectionError;
     }
     throw error;
   }

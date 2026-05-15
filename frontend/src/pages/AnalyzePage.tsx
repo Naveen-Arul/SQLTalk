@@ -7,9 +7,14 @@ import { SQLDisplay } from '@/components/SQLDisplay';
 import { ResultsTable } from '@/components/ResultsTable';
 import { ResultsChart } from '@/components/ResultsChart';
 import { ExportPanel } from '@/components/ExportPanel';
-import { analyzeQuery, AnalyzeResponse } from '@/lib/api';
+import { analyzeQuery, AnalyzeResponse, getApiBaseUrl } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
 import { AlertCircle, Sparkles, Database, Zap } from 'lucide-react';
+
+type AnalyzeErrorWithFlags = Error & {
+  isSecurityIssue?: boolean;
+  isConnectionError?: boolean;
+};
 
 const AnalyzePage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,8 +40,9 @@ const AnalyzePage = () => {
       setError(errorMessage);
       
       // Determine if this is a security issue or connection issue
-      const isSecurityIssue = (err as any).isSecurityIssue;
-      const isConnectionError = (err as any).isConnectionError;
+      const flaggedError = err instanceof Error ? (err as AnalyzeErrorWithFlags) : undefined;
+      const isSecurityIssue = flaggedError?.isSecurityIssue;
+      const isConnectionError = flaggedError?.isConnectionError;
       
       toast({
         title: isSecurityIssue ? 'Security Restriction' : 'Analysis Failed',
@@ -119,7 +125,7 @@ const AnalyzePage = () => {
                     <p className="text-muted-foreground mb-3">{error}</p>
                     {!error.includes('Security restriction') && (
                       <p className="text-sm text-muted-foreground/70">
-                        Make sure the backend server is running at localhost:5000
+                        The frontend is trying to reach {getApiBaseUrl()}
                       </p>
                     )}
                   </div>
